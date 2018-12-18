@@ -12,7 +12,7 @@ import axios from 'axios';
 import type { AxiosInstance } from 'axios';
 import type { Error, IHttpService, ResponseType } from './Http.type';
 
-const BASE = '//witness.faircv.dscp.serokell.review/api/witness/v1';
+const BASE = process.env.WITNESS_API_URL;
 // const BASE = '//localhost:8013/api/witness/v1';
 
 class HttpService implements IHttpService {
