@@ -6,7 +6,10 @@ type CheckResultProps = {
 }
 
 const CheckResult = ({ isValid }: CheckResultProps) => (
-  isValid ? <h5>valid</h5> : <h5>invalid</h5>
+  <div
+    className={`condition__status ${isValid ? 'condition__status--ok' : 'condition__status--error'}`}>
+    {`This FairCV is ${isValid ? '' : 'not'} valid`}
+  </div>
 );
 
 export default CheckResult;
