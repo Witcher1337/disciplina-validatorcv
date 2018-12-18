@@ -33,8 +33,8 @@ class App extends Component<{}, AppType> {
   
   requestCheckAsync = async () => {
     try {
-      await HttpService.put('/checkcv', this.state.file);
-      this.setState({ isCvValid: true });
+      const checkRes = await HttpService.put('/checkcv', this.state.file);
+      this.setState({ isCvValid: checkRes.isValid });
     } catch (e) {
       console.log(e);
       this.setState({ isCvValid: false });
