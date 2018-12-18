@@ -27,7 +27,7 @@ class HttpService implements IHttpService {
   _makeBaseOptions(): any {
     return {
       headers: { 'Content-Type': 'application/json' },
-      withCredentials: true
+      withCredentials: false
     };
   }
   
