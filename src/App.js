@@ -18,7 +18,6 @@ type AppType = {
 }
 
 const AppInitialState = {
-  selectedLanguage: CONSTANTS.LANGUAGES.EN,
   file: null,
   isChecked: false,
   isCvValid: false
@@ -29,7 +28,16 @@ class App extends Component<{}, AppType> {
     ...AppInitialState
   };
   
-  changeLanguage = (lang: string) => this.setState({ selectedLanguage: lang });
+  componentDidMount(): void {
+    const urlParams = new URLSearchParams(window.location.search);
+    const lang = urlParams.get('lang') || CONSTANTS.LANGUAGES.EN;
+    this.changeLanguage(lang);
+  }
+  
+  changeLanguage = (lang: string) => {
+    this.setState({ selectedLanguage: lang.toUpperCase() });
+    window.history.pushState({}, '', `?lang=${lang}`);
+  };
   
   fileUploadHandler = (file) => {
     this.setState({
