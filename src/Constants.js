@@ -46,7 +46,7 @@ const CONSTANTS = {
       JP: 'を選択しました',
       EN: '',
       ZH: '',
-      KR: ''
+      KR: '을 선택하셨습니다'
     },
     BROWSE_BTN: {
       JP: '閲覧する',
