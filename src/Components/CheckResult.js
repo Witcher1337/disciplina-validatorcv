@@ -1,14 +1,16 @@
 // @flow
 import React from 'react';
+import CONSTANTS from '../Constants';
 
 type CheckResultProps = {
-  isValid: boolean
+  isValid: boolean,
+  lang: string
 }
 
-const CheckResult = ({ isValid }: CheckResultProps) => (
+const CheckResult = ({ isValid, lang }: CheckResultProps) => (
   <div
     className={`condition__status ${isValid ? 'condition__status--ok' : 'condition__status--error'}`}>
-    {`This FairCV is ${isValid ? '' : 'not'} valid`}
+    {isValid ? CONSTANTS.TRANSLATIONS.VALID[lang] : CONSTANTS.TRANSLATIONS.NOT_VALID[lang] }
   </div>
 );
 

@@ -5,13 +5,15 @@
 * that handles FileReader result. Error console.log added for debug.
 * */
 import * as React from 'react';
+import CONSTANTS from '../../Constants';
 
 type FileUploaderProps = {
   isMultiple: boolean,
   accept: string,
   dispatchBaseFile: (file: any) => void,
   file: any,
-  dispatchValidate: () => Promise<any>
+  dispatchValidate: () => Promise<any>,
+  lang: string
 }
 
 export default class FileUploader extends React.Component<FileUploaderProps, {}> {
@@ -66,7 +68,7 @@ export default class FileUploader extends React.Component<FileUploaderProps, {}>
   };
   
   render() {
-    const { isMultiple, accept, file, dispatchValidate } = this.props;
+    const { isMultiple, accept, file, dispatchValidate, lang } = this.props;
     const { fileName } = this.state;
     return (
       <section
@@ -78,21 +80,27 @@ export default class FileUploader extends React.Component<FileUploaderProps, {}>
       >
         {file ?
           <>
-            <p className="text-center dropzone__legend">You selected<br/><strong>{fileName}</strong></p>
+            <p className="text-center dropzone__legend">
+              {CONSTANTS.TRANSLATIONS.DRAGZONE_SELECTED_1[lang]}
+              <strong>{fileName}</strong>
+              {CONSTANTS.TRANSLATIONS.DRAGZONE_SELECTED_2[lang]}
+            </p>
             <label
               className="button dropzone__file-uploader btn btn--filled"
               onClick={dispatchValidate}
             >
-              Validate FairCV
+              {CONSTANTS.TRANSLATIONS.VALIDATE_BTN[lang]}
             </label>
           </>
           :
           <>
-            <p className="text-center dropzone__legend">Drag FairCV file here<br/>or&nbsp;select it&nbsp;on&nbsp;your
-              computer
+            <p className="text-center dropzone__legend">
+              {CONSTANTS.TRANSLATIONS.DRAGZONE_PREPARE_1[lang]}
+              <br/>
+              {CONSTANTS.TRANSLATIONS.DRAGZONE_PREPARE_2[lang]}
             </p>
             <label htmlFor="file-uploader" className="button dropzone__file-uploader btn btn--filled">
-              Browse
+              {CONSTANTS.TRANSLATIONS.BROWSE_BTN[lang]}
               <input className="dropzone__input"
                      id="file-uploader"
                      type="file"
