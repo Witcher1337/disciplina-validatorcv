@@ -12,35 +12,35 @@ import axios from 'axios';
 import type { AxiosInstance } from 'axios';
 import type { Error, IHttpService, ResponseType } from './Http.type';
 
-const BASE = `//${process.env.WITNESS_API_URL}/api/witness/v1`;
+const BASE = `${process.env.WITNESS_API_URL}/api/witness/v1`;
 // const BASE = '//localhost:8013/api/witness/v1';
 
 class HttpService implements IHttpService {
   httpService: typeof axios;
-  
+
   constructor(axiosService: AxiosInstance) {
     this.httpService = axiosService.create({
       baseURL: BASE
     });
   }
-  
+
   _makeBaseOptions(): any {
     return {
       headers: { 'Content-Type': 'application/json' },
       withCredentials: false
     };
   }
-  
+
   async get(url: string): Promise<ResponseType | Error> {
     const response: ResponseType = await this.httpService.get(url, this._makeBaseOptions());
     return this.dataHandler(response);
   }
-  
+
   async put(url: string, data: any): Promise<ResponseType | Error> {
     const response: ResponseType = await this.httpService.put(url, data, this._makeBaseOptions());
     return this.dataHandler(response);
   }
-  
+
   // async post(url: string, data?: any): Promise<ResponseType | Error> {
   //   const response: ResponseType = await this.httpService.post(url, data, this._makeBaseOptions());
   //   return this.dataHandler(response);
@@ -55,7 +55,7 @@ class HttpService implements IHttpService {
   //   const response: ResponseType = await this.httpService.delete(url, this._makeBaseOptions());
   //   return this.dataHandler(response);
   // }
-  
+
   dataHandler(response: ResponseType): any {
     return response.data;
   }

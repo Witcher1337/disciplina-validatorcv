@@ -1,4 +1,5 @@
 import (fetchGit {
   url = https://github.com/serokell/serokell-closure;
-  rev = "8b9ac2eca5545fe9607364cbf4ff4f154dd6ea4e";
+  rev = "5d00f8fb8de242ed0c39db9992d0dde0f6df3c15";
+  ref = "20181218192002";
 })
