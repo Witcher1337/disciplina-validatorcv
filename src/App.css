@@ -167,7 +167,7 @@ body {
   background: #fff;
   color: #212121;
   overflow: auto;
-  font-weight: 200;
+  font-weight: 500;
   letter-spacing: 0.03em;
 }
 
@@ -562,13 +562,13 @@ input::-moz-focus-inner {
 .pageLegend__title {
   font-size: 36px;
   line-height: 1.16667;
-  font-weight: 400;
+  font-weight: 500;
 }
 
 .pageLegend__text {
   font-size: 24px;
   line-height: 1.16667;
-  font-weight: 300;
+  font-weight: 400;
   padding-top: 16px;
 }
 
@@ -1101,4 +1101,54 @@ input::-moz-focus-inner {
 .condition__status--error {
   border: 1px solid #FF5760;
   color: #FF5760;
+}
+
+.selectBox {
+  width: 60px;
+  font-weight: 400;
+  color: #fff;
+  text-transform: uppercase;
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -ms-flex-align: end;
+  align-items: flex-end;
+  cursor: pointer;
+}
+.selectBox .input {
+  padding-right: 15px;
+  width: 65px;
+  position: relative;
+  text-align: right;
+}
+.selectBox .input::after {
+  content: "";
+  display: inline-block;
+  position: absolute;
+  top: 10px;
+  right: 0;
+  border-style: solid;
+  border-color: transparent #fff;
+  height: 3px;
+  width: 10px;
+  border-width: 4px 8px 4px 0;
+  transform: rotate(-90deg);
+  vertical-align: 3px;
+  transition: transform .3s ease-in-out;
+  transform-origin: center center;
+}
+.selectBox.active .input::after {
+  transform: rotate(90deg);
+}
+.selectBox .options {
+  width: 66px;
+  padding: 8px;
+  box-shadow: 0 2px 4px 0 rgba(0,0,0,.5);
+  border-radius: 3px;
+  margin-top: 10px;
+  transition: transform .3s ease-in-out;
 }
