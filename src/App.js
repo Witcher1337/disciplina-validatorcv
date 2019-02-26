@@ -50,7 +50,9 @@ class App extends Component<{}, AppType> {
       const { file } = this.state
       const endpoint = file.type === 'application/pdf' ? '/checkcv-pdf' : '/checkcv'
       const checkRes = await HttpService.put(endpoint, file);
-      this.setState({ isCvValid: checkRes.isValid });
+
+      const isCvValid = file.type === 'application/pdf' ? checkRes.checkResult.isValid : checkRes.isValid
+      this.setState({ isCvValid });
     } catch (e) {
       console.log(e);
       this.setState({ isCvValid: false });
