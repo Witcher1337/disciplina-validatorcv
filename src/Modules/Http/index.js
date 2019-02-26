@@ -24,9 +24,11 @@ class HttpService implements IHttpService {
     });
   }
 
-  _makeBaseOptions(): any {
+  _makeBaseOptions(data?: any): any {
+    const type = data instanceof File ? data.type : 'application/json'
+
     return {
-      headers: { 'Content-Type': 'application/json' },
+      headers: { 'Content-Type': type },
       withCredentials: false
     };
   }
@@ -37,7 +39,7 @@ class HttpService implements IHttpService {
   }
 
   async put(url: string, data: any): Promise<ResponseType | Error> {
-    const response: ResponseType = await this.httpService.put(url, data, this._makeBaseOptions());
+    const response: ResponseType = await this.httpService.put(url, data, this._makeBaseOptions(data));
     return this.dataHandler(response);
   }
 

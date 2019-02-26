@@ -27,27 +27,29 @@ class App extends Component<{}, AppType> {
   state: AppType = {
     ...AppInitialState
   };
-  
+
   componentDidMount(): void {
     const urlParams = new URLSearchParams(window.location.search);
     const lang = urlParams.get('lang') || CONSTANTS.LANGUAGES.EN;
     this.changeLanguage(lang);
   }
-  
+
   changeLanguage = (lang: string) => {
     this.setState({ selectedLanguage: lang.toUpperCase() });
     window.history.pushState({}, '', `?lang=${lang}`);
   };
-  
+
   fileUploadHandler = (file) => {
     this.setState({
-      file: JSON.parse(file)
+      file: file
     })
   };
-  
+
   requestCheckAsync = async () => {
     try {
-      const checkRes = await HttpService.put('/checkcv', this.state.file);
+      const { file } = this.state
+      const endpoint = file.type === 'application/pdf' ? '/checkcv-pdf' : '/checkcv'
+      const checkRes = await HttpService.put(endpoint, file);
       this.setState({ isCvValid: checkRes.isValid });
     } catch (e) {
       console.log(e);
@@ -56,9 +58,9 @@ class App extends Component<{}, AppType> {
       this.setState({ isChecked: true });
     }
   };
-  
+
   clearForm = () => this.setState(state => ({ ...AppInitialState, selectedLanguage: state.selectedLanguage }));
-  
+
   render() {
     const { isChecked, isCvValid, file, selectedLanguage } = this.state;
     return (
