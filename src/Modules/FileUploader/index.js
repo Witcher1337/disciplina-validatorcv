@@ -19,54 +19,49 @@ type FileUploaderProps = {
 export default class FileUploader extends React.Component<FileUploaderProps, {}> {
   static defaultProps = {
     isMultiple: false,
-    accept: 'application/json',
+    accept: 'application/json,application/pdf',
     file: null
   };
-  
+
   state = {
     fileName: ''
   };
-  
+
   onSelectFile = (e: SyntheticInputEvent<HTMLInputElement>): void => {
     if (e.target.files && e.target.files.length > 0) {
       this.proceedFile(e.target.files[ 0 ]);
     }
   };
-  
+
   onDrop = (e: { dataTransfer: { files: any[] }, preventDefault: () => void }): void => {
     e.preventDefault();
     this.proceedFile(e.dataTransfer.files[ 0 ]);
   };
-  
-  onFileLoaded = (file: any): void => {
-    const { dispatchBaseFile } = this.props;
-    dispatchBaseFile(file);
-  };
-  
+
   onErrorFileLoader = (error: any): void => {
     console.log(error);
   };
-  
+
   handleDragOver = (e: SyntheticEvent<any>) => e.preventDefault();
-  
+
   proceedFile = (file: File): void => {
-    const reader = new FileReader();
-    reader.onload = () => this.onFileLoaded(reader.result);
-    reader.onerror = error => this.onErrorFileLoader(error);
-    reader.readAsText(file);
     this.setState({ fileName: file.name });
+
+    const { dispatchBaseFile } = this.props;
+
+    dispatchBaseFile(file);
   };
-  
+
   onDragEnterHandler = (e: SyntheticEvent<any>) => {
     e.preventDefault();
     document.getElementsByClassName('fileupload-dropzone')[ 0 ].classList.add('dropzone--dragging');
   };
-  
+
   onDragLeaveHandler = (e: SyntheticEvent<any>) => {
     e.preventDefault();
     document.getElementsByClassName('fileupload-dropzone')[ 0 ].classList.remove('dropzone--dragging');
   };
-  
+
   render() {
     const { isMultiple, accept, file, dispatchValidate, lang } = this.props;
     const { fileName } = this.state;
@@ -111,7 +106,7 @@ export default class FileUploader extends React.Component<FileUploaderProps, {}>
             </label>
           </>
         }
-      
+
       </section>
     );
   }
