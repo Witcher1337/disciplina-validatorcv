@@ -68,7 +68,6 @@ class App extends Component<{}, AppType> {
       const fileMerkleRoot = `0x${firstTx.val.root.root}`;
       const blockMerkleRoot = data.privateBlockHeader && data.privateBlockHeader.merkleRoot;
 
-      debugger
       this.setState({
         isChecked: true,
         isCvValid: blockMerkleRoot === fileMerkleRoot,
